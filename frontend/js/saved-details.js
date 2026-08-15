@@ -1,18 +1,10 @@
-const API = "http://127.0.0.1:8000";
+const API = "https://loanrisk-api.onrender.com";
 
-
-// =================================
-// Check Login
-// =================================
 
 if (!localStorage.getItem("employee")) {
     window.location.href = "index.html";
 }
 
-
-// =================================
-// Logout
-// =================================
 
 document
     .getElementById("logout")
@@ -24,16 +16,10 @@ document
     });
 
 
-// =================================
-// Current Tab
-// =================================
 
 let currentStatus = "Approved";
 
 
-// =================================
-// Tab Buttons
-// =================================
 
 document
     .querySelectorAll(".tabs button")
@@ -58,9 +44,6 @@ document
     });
 
 
-// =================================
-// Load Predictions
-// =================================
 
 async function loadPredictions() {
 
@@ -105,10 +88,6 @@ async function loadPredictions() {
         }
 
 
-        // ================================
-        // No Records
-        // ================================
-
         if (data.length === 0) {
 
             records.innerHTML = `
@@ -131,9 +110,6 @@ async function loadPredictions() {
         records.innerHTML = "";
 
 
-        // ================================
-        // Display Records
-        // ================================
 
         data.forEach((prediction) => {
 
@@ -256,9 +232,7 @@ async function loadPredictions() {
 }
 
 
-// =================================
-// Delete Prediction
-// =================================
+
 
 async function deletePrediction(id) {
 
@@ -323,8 +297,5 @@ async function deletePrediction(id) {
 }
 
 
-// =================================
-// Initial Load
-// =================================
 
 loadPredictions();

@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:8000";
+const API = "https://loanrisk-api.onrender.com";
 
 const signupForm = document.getElementById("signupForm");
 const nameInput = document.getElementById("name");

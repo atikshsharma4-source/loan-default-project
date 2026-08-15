@@ -1,18 +1,9 @@
-const API = "http://127.0.0.1:8000";
+const API = "https://loanrisk-api.onrender.com";
 
-
-// =================================
-// Check Login
-// =================================
 
 if (!localStorage.getItem("employee")) {
     window.location.href = "index.html";
 }
-
-
-// =================================
-// Logout
-// =================================
 
 document
     .getElementById("logout")
@@ -22,15 +13,6 @@ document
 
         window.location.href = "index.html";
     });
-
-// =================================
-// Customer Fields
-// =================================
-
-// =================================
-// Risk Threshold
-// =================================
-
 const thresholdDisplay =
     document.getElementById("threshold");
 
@@ -42,11 +24,6 @@ const updateThresholdButton =
 
 const thresholdMsg =
     document.getElementById("thresholdMsg");
-
-
-// =================================
-// Load Current Threshold
-// =================================
 
 async function loadThreshold() {
 
@@ -91,12 +68,6 @@ async function loadThreshold() {
             "#ff8996";
     }
 }
-
-
-// =================================
-// Update Threshold
-// =================================
-
 updateThresholdButton.addEventListener(
     "click",
     async () => {
@@ -188,12 +159,6 @@ updateThresholdButton.addEventListener(
 
     }
 );
-
-
-// =================================
-// Load Threshold On Dashboard
-// =================================
-
 loadThreshold();
 
 const fields = [
@@ -212,18 +177,8 @@ const fields = [
     "Loan_Intent"
 ];
 
-
-// =================================
-// Store Last Prediction
-// =================================
-
 let lastCustomerData = null;
 let predictionCompleted = false;
-
-
-// =================================
-// Prediction
-// =================================
 
 document
     .getElementById("predictionForm")
@@ -266,9 +221,7 @@ document
 
         try {
 
-            // ================================
-            // Call /predict
-            // ================================
+            
 
             const response =
                 await fetch(
@@ -302,9 +255,7 @@ document
             }
 
 
-            // ================================
-            // Store Data
-            // ================================
+            
 
             lastCustomerData =
                 customerData;
@@ -319,10 +270,6 @@ document
                 "saveButton"
             ).disabled = false;
 
-
-            // ================================
-            // Display Result
-            // ================================
 
             document
                 .getElementById("result")
@@ -384,11 +331,6 @@ document
 
     });
 
-
-// =================================
-// Save Prediction
-// =================================
-
 document
     .getElementById("saveButton")
     .addEventListener("click", async () => {
@@ -412,10 +354,6 @@ document
 
 
         try {
-
-            // ================================
-            // Call /save
-            // ================================
 
             const response =
                 await fetch(
@@ -448,10 +386,6 @@ document
                 );
             }
 
-
-            // ================================
-            // Success
-            // ================================
 
             message.textContent =
                 "Prediction saved successfully.";

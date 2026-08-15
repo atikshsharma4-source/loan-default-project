@@ -1,9 +1,4 @@
-const API = "http://127.0.0.1:8000";
-
-
-// =================================
-// Login Form
-// =================================
+const API = "https://loanrisk-api.onrender.com";
 
 document
     .getElementById("loginForm")
@@ -35,9 +30,7 @@ document
 
         try {
 
-            // ================================
-            // Call FastAPI Login
-            // ================================
+
 
             const response =
                 await fetch(
@@ -52,9 +45,7 @@ document
                 await response.json();
 
 
-            // ================================
-            // Handle Error
-            // ================================
+
 
             if (!response.ok) {
 
@@ -66,9 +57,6 @@ document
             }
 
 
-            // ================================
-            // Store Employee Information
-            // ================================
 
             const employee =
                 data.employee;
@@ -80,9 +68,6 @@ document
             );
 
 
-            // ================================
-            // Success Message
-            // ================================
 
             message.textContent =
                 "Login successful!";
@@ -90,10 +75,6 @@ document
             message.style.color =
                 "#55d6a0";
 
-
-            // ================================
-            // Go to Dashboard
-            // ================================
 
             setTimeout(() => {
 
