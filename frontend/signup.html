@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LoanRisk | Signup</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth">
+
+    <main class="card">
+
+        <!-- Brand -->
+        <div class="brand">
+            ◆
+            <span>
+                LoanRisk
+                <small>Risk Management System</small>
+            </span>
+        </div>
+
+
+        <!-- Signup Heading -->
+        <h1>
+            Create account
+        </h1>
+
+        <p>
+            Register as a bank employee.
+        </p>
+
+
+        <!-- Signup Form -->
+        <form id="signupForm">
+
+            <!-- Full Name -->
+            <label>
+                Full name
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="Your name"
+                    required
+                >
+            </label>
+
+
+            <!-- Work Email -->
+            <label>
+                Work email
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="employee@graphicera.com"
+                    required
+                >
+            </label>
+
+
+            <!-- Password -->
+            <label>
+                Password
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    required
+                >
+            </label>
+
+
+            <!-- Signup Button -->
+            <button type="submit">
+                Create account →
+            </button>
+
+
+            <!-- Status / Error Message -->
+            <div id="msg"></div>
+
+        </form>
+
+
+        <!-- Login Link -->
+        <footer>
+            Already registered?
+
+            <a href="index.html">
+                Sign in
+            </a>
+        </footer>
+
+    </main>
+
+
+    <!-- Signup JavaScript -->
+    <script src="js/signup.js"></script>
+
+</body>
+
+</html>

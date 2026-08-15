@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LoanRisk | Saved Details</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ================================
+         Navigation Bar
+    ================================= -->
+
+    <header>
+
+        <a
+            class="brand"
+            href="dashboard.html"
+        >
+            ◆
+
+            <span>
+                LoanRisk
+                <small>Risk Management System</small>
+            </span>
+        </a>
+
+
+        <nav>
+
+            <!-- Dashboard -->
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+
+            <!-- Current Page -->
+
+            <a
+                class="active"
+                href="saved-details.html"
+            >
+                Saved Details
+            </a>
+
+
+            <!-- Logout -->
+
+            <button
+                type="button"
+                id="logout"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ================================
+         Main Content
+    ================================= -->
+
+    <main class="container">
+
+
+        <!-- Page Heading -->
+
+        <div class="heading">
+
+            <div>
+
+                <small class="eyebrow">
+                    APPLICATIONS
+                </small>
+
+
+                <h1>
+                    Saved Details
+                </h1>
+
+
+                <p>
+                    Review analyzed loan applications.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================
+             Application Status Tabs
+        ================================= -->
+
+        <div class="tabs">
+
+            <button
+                type="button"
+                class="active"
+                data-status="Approved"
+            >
+                Approved
+            </button>
+
+
+            <button
+                type="button"
+                data-status="Not Approved"
+            >
+                Not Approved
+            </button>
+
+        </div>
+
+
+
+        <!-- ================================
+             Saved Records
+        ================================= -->
+
+        <section class="panel">
+
+            <div id="records">
+                Loading...
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- Saved Details JavaScript -->
+
+    <script src="js/saved-details.js"></script>
+
+</body>
+
+</html>

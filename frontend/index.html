@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LoanRisk | Login</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth">
+
+    <main class="card">
+
+        <!-- Brand -->
+        <div class="brand">
+            ◆
+            <span>
+                LoanRisk
+                <small>Risk Management System</small>
+            </span>
+        </div>
+
+
+        <!-- Login Heading -->
+        <h1>Welcome back</h1>
+
+        <p>
+            Sign in to your bank employee account.
+        </p>
+
+
+        <!-- Login Form -->
+        <form id="loginForm">
+
+            <label>
+                Email
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="employee@graphicera.com"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Password
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    required
+                >
+            </label>
+
+
+            <button type="submit">
+                Sign in →
+            </button>
+
+
+            <!-- Login status/error -->
+            <div id="msg"></div>
+
+        </form>
+
+
+        <!-- Signup -->
+        <footer>
+            New employee?
+
+            <a href="signup.html">
+                Create an account
+            </a>
+        </footer>
+
+    </main>
+
+
+    <!-- Login JavaScript -->
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>
