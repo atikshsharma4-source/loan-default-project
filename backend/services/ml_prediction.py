@@ -1,133 +1,125 @@
 import pickle
 import pandas as pd
-with open("ml/loan_default_xgboost.pkl", "rb") as file:
-    model = pickle.load(file)
 
-with open("ml/scaler.pkl", "rb") as file:
-    scaler = pickle.load(file)
 
-with open("ml/feature_names.pkl", "rb") as file:
-    feature_names = pickle.load(file)
+# ==============================
+# Load trained ML pipeline
+# ==============================
 
-print("ML model loaded successfully!")
-print("Scaler loaded successfully!")
-print("Feature names loaded successfully!")
+with open("ml/loan_default_pipeline.pkl", "rb") as file:
+    model_pipeline = pickle.load(file)
 
-print("\nFeature names expected by model:")
-for i, feature in enumerate(feature_names):
-    print(i, feature)
+print("ML pipeline loaded successfully!")
+
+
+# ==============================
+# Load ML threshold
+# ==============================
+
+with open("ml/loan_default_threshold.pkl", "rb") as file:
+    model_threshold = pickle.load(file)
+
+print(f"ML threshold loaded successfully: {model_threshold}")
+
+
+# ==============================
+# Prepare customer features
+# ==============================
 
 def prepare_features(data):
+
     df = pd.DataFrame([data])
 
-    # Calculate features exactly as used during training
+    # Normalize categorical values
+    df["Gender"] = (
+        df["Gender"].astype(str).str.strip().str.lower()
+    )
+
+    df["Education"] = (
+        df["Education"].astype(str).str.strip().str.lower()
+    )
+
+    df["Home Onwership"] = (
+        df["Home Onwership"].astype(str).str.strip().str.lower()
+    )
+
+    df["Loan Intent"] = (
+        df["Loan Intent"].astype(str).str.strip().str.lower()
+    )
+
+    # Feature engineering
     df["Income_per_Experience"] = (
-        df["Person Income"] / (df["Employee Experience"] + 1)
+        df["Person Income"] /
+        (df["Employee Experience"] + 1)
+    )
+
+    df["Loan_Income_Ratio"] = (
+        df["Loan Amount"] /
+        df["Person Income"]
     )
 
     df["Interest_Burden"] = (
-        df["Loan Amount"] * df["Loan interest Rate"]
+        df["Loan Amount"] *
+        df["Loan interest Rate"]
     )
 
-    # Convert Gender
-    df["Gender"] = df["Gender"].map({
-        "Male": 1,
-        "Female": 0
-    })
-
-    # Convert Previous Loan
-    df["Previous Loan"] = df["Previous Loan"].map({
-        "Yes": 1,
-        "No": 0
-    })
-
-    # One-hot encode categorical columns
-    df = pd.get_dummies(
-        df,
-        columns=["Education", "Home Onwership", "Loan Intent"],
-        drop_first=True
-    )
-
-    # Add missing model columns with 0
-    for feature in feature_names:
-        if feature not in df.columns:
-            df[feature] = 0
-
-    # Keep exact 24-feature order
-    df = df[feature_names]
-
-    # These are the 10 columns scaled during training
-    continuous_cols = [
+    # Exact features used during training
+    feature_columns = [
         "Age",
+        "Gender",
+        "Education",
         "Person Income",
         "Employee Experience",
+        "Home Onwership",
         "Loan Amount",
+        "Loan Intent",
         "Loan interest Rate",
         "Loan percentage",
         "Credit History",
         "Credit Score",
         "Income_per_Experience",
+        "Loan_Income_Ratio",
         "Interest_Burden"
     ]
 
-    # Use the already-trained scaler
-    df[continuous_cols] = scaler.transform(df[continuous_cols])
+    df = df[feature_columns]
 
     return df
 
+
+# ==============================
+# Predict default risk
+# ==============================
+
 def predict_risk(data):
-    # Prepare the customer's features
+
     features = prepare_features(data)
 
-    # Get probability from XGBoost
-    probabilities = model.predict_proba(features)
+    probabilities = model_pipeline.predict_proba(features)
 
-    # Probability of default (class 1)
     default_probability = probabilities[0][1]
 
-    # Convert to percentage
     risk_percentage = default_probability * 100
 
-    return risk_percentage
+    return float(risk_percentage)
+
+
+# ==============================
+# Bank decision
+# ==============================
 
 def get_decision(risk_percentage, safety_threshold):
+
     safety_percentage = 100 - risk_percentage
 
     if safety_percentage >= safety_threshold:
         decision = "Approved"
     else:
         decision = "Not Approved"
+
     return {
-    "risk_percentage": float(risk_percentage),
-    "safety_percentage": float(safety_percentage),
-    "threshold_used": float(safety_threshold),
-    "decision": decision
-}
-
-    
-
-test_data = {
-    "Age": 30,
-    "Gender": "Male",
-    "Person Income": 500000,
-    "Employee Experience": 5,
-    "Loan Amount": 200000,
-    "Loan interest Rate": 10,
-    "Loan percentage": 40,
-    "Credit History": 5,
-    "Credit Score": 700,
-    "Previous Loan": "No",
-    "Education": "Bachelor",
-    "Home Onwership": "Rent",
-    "Loan Intent": "Personal"
-}
-
-risk = predict_risk(test_data)
-
-print("\nDefault Risk:", risk, "%")
-print("Safety:", 100 - risk, "%")
-
-result = get_decision(risk, 90)
-
-print("\nFinal Decision:")
-print(result)
+        "risk_percentage": float(risk_percentage),
+        "safety_percentage": float(safety_percentage),
+        "threshold_used": float(safety_threshold),
+        "decision": decision
+    }

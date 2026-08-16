@@ -12,9 +12,7 @@
 
 <body>
 
-    <!-- ================================
-         Navigation Bar
-    ================================= -->
+
 
     <header>
 
@@ -55,9 +53,7 @@
     </header>
 
 
-    <!-- ================================
-         Main Content
-    ================================= -->
+
 
     <main class="container">
 
@@ -125,9 +121,7 @@
 
 
 
-        <!-- ================================
-             Prediction Form
-        ================================= -->
+
 
         <form
             id="predictionForm"
@@ -189,7 +183,7 @@
                 <!-- Person Income -->
 
                 <label>
-                    Person Income
+                    Person Income ( ₹ MOTHLY)
 
                     <input
                         id="Person_Income"
@@ -205,7 +199,7 @@
                 <!-- Employee Experience -->
 
                 <label>
-                    Employee Experience
+                    Employee Experience (IN YEARS)
 
                     <input
                         id="Employee_Experience"
@@ -254,13 +248,13 @@
                 <!-- Loan Percentage -->
 
                 <label>
-                    Loan Percentage
+                    Loan Percentage (Ratio)
 
                     <input
                         id="Loan_percentage"
                         type="number"
-                        min="1"
-                        max="100"
+                        min="0"
+                        max="1"
                         step="0.01"
                         required
                     >
@@ -299,35 +293,7 @@
                     >
                 </label>
 
-
-
-                <!-- Previous Loan -->
-
-                <label>
-                    Previous Loan
-
-                    <select
-                        id="Previous_Loan"
-                        required
-                    >
-
-                        <option value="">
-                            Select
-                        </option>
-
-                        <option value="No">
-                            No
-                        </option>
-
-                        <option value="Yes">
-                            Yes
-                        </option>
-
-                    </select>
-
-                </label>
-
-
+                
 
                 <!-- Education -->
 
@@ -451,9 +417,7 @@
 
 
 
-            <!-- ================================
-                 Action Buttons
-            ================================= -->
+
 
             <div class="action-buttons">
 
@@ -485,9 +449,7 @@
 
 
 
-        <!-- ================================
-             Prediction Result
-        ================================= -->
+
 
         <section
             id="result"
